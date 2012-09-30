@@ -1,22 +1,33 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+filetype off
+
 " TODO: this may not be in the correct place. It is intended to allow overriding <Leader>.
 " source ~/.vimrc.before if it exists.
 if filereadable(expand("~/.vimrc.before"))
   source ~/.vimrc.before
 endif
 :au FocusLost * :wa
-" =============== Pathogen Initialization ===============
+" =============== Vundle Initialization ===============
 " This loads all the plugins in ~/.vim/bundle
 " Use tpope's pathogen plugin to manage all other plugins
 
-  runtime bundle/vim-pathogen/autoload/pathogen.vim
-  call pathogen#infect()
-  call pathogen#helptags()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
+Bundle 'gmarik/vundle'
+Bundle 'tpope/vim-fugitive'
+"Bundle 'belike81/vim-snipmate'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'altercation/vim-colors-solarized' 
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'tomasr/molokai'
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+Bundle 'git://git.wincent.com/command-t.git'
+Bundle 'majutsushi/tagbar'
 " ================ General Config ====================
-"let g:Powerline_symbols = 'fancy'
 autocmd FileType html,htmldjango,jinjahtml,eruby,mako let b:closetag_html_style=1
 autocmd FileType html,xhtml,xml,htmldjango,jinjahtml,eruby,mako source ~/.vim/bundle/closetag/plugin/closetag.vim
 "let mapleader = ","
@@ -131,3 +142,8 @@ let g:nerdtree_tabs_open_on_console_startup=1
 set nostartofline
 
 nnoremap <leader>l :TagbarToggle<CR>
+set laststatus=2
+set encoding=utf-8
+set t_Co=256
+let g:Powerline_symbols = 'fancy'
+set fillchars+=stl:\ ,stlnc:\
